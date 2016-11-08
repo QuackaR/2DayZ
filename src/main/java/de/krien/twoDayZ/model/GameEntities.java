@@ -1,5 +1,6 @@
 package de.krien.twoDayZ.model;
 
+import de.krien.twoDayZ.model.objects.chest.Chest;
 import de.krien.twoDayZ.model.player.Player;
 import de.krien.twoDayZ.util.debug.Stats;
 
@@ -19,6 +20,9 @@ public enum GameEntities {
 		//TMP
 		Player player = new Player();
 		entityList.add(player);
+		Chest chest = new Chest();
+		entityList.add(chest);
+		//
 	}
 
 	public List<IGameEntity> getEntityList() {

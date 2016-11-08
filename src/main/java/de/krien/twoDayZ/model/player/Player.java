@@ -41,7 +41,7 @@ public class Player implements IGameEntity {
 		this.size = DEFAULT_SIZE;
 		this.movementSpeed = WALK_MOVEMENT_SPEED;
 		this.rotation = DEFAULT_ROTATION;
-		this.texture = TextureUtil.loadPlayerImage(EPlayerModels.DEFAULT);
+		this.texture = TextureUtil.loadGameEntityImage(EPlayerModels.DEFAULT);
 		this.playerMovement = new PlayerMovement();
 
 		verticesBufferID = GL15.glGenBuffers();
@@ -55,6 +55,8 @@ public class Player implements IGameEntity {
 		this.movementSpeed = movementSpeed;
 		this.rotation = rotation;
 		this.texture = texture;
+		verticesBufferID = GL15.glGenBuffers();
+		texturesBufferID = GL15.glGenBuffers();
 	}
 
 	@Override
@@ -67,27 +69,14 @@ public class Player implements IGameEntity {
 
 	@Override
 	public void draw() {
-		GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
-		GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
-		Color.white.bind();
-		texture.bind();
-		GL11.glPushMatrix();
-		{
-			GL11.glScalef(size, size, size);
-			GL11.glTranslatef(position.getX(), position.getY(), 0);
-			GL11.glRotatef((float)rotation, 0.0f, 0.0f, 1.0f); //TODO rotation zu float refactorn
-			GL11.glTranslatef(-position.getX(), -position.getY(), 0);
-
-			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, verticesBufferID);
-			GL11.glVertexPointer(2, GL11.GL_FLOAT, 0, 0L);
-			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, texturesBufferID);
-			GL11.glTexCoordPointer(2, GL11.GL_FLOAT, 0, 0L);
-
-			GL11.glDrawArrays(GL11.GL_QUADS, 0, vertices.limit());
-		}
-		GL11.glPopMatrix();
-		GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
-		GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
+		RenderUtil.drawGameObject(
+				texture,
+				size,
+				position,
+				(float)rotation,
+				verticesBufferID,
+				texturesBufferID,
+				vertices.limit());
 	}
 
 	public void running() {

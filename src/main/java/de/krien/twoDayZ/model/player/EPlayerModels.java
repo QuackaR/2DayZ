@@ -1,16 +1,22 @@
 package de.krien.twoDayZ.model.player;
 
-public enum EPlayerModels {
+import de.krien.twoDayZ.model.IGameEntityModel;
 
-    DEFAULT(1);
+public enum EPlayerModels implements IGameEntityModel {
 
-    private int modelID;
+    DEFAULT("PLAYER_1");
 
-    EPlayerModels(int modelID) {
+    private static final String type = "player";
+    private String modelID;
+
+    EPlayerModels(String modelID) {
         this.modelID = modelID;
     }
 
-    public int getModelID() {
+    public String getModelID() {
         return modelID;
+    }
+    public String getType() {
+        return type;
     }
 }
