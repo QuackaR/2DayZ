@@ -2,12 +2,9 @@ package de.krien.twoDayZ.model.player;
 
 import de.krien.twoDayZ.model.IGameEntity;
 import de.krien.twoDayZ.util.movement.MovementUtil;
-import de.krien.twoDayZ.util.position.PositionUtil;
 import de.krien.twoDayZ.util.position.RotationUtil;
+import de.krien.twoDayZ.util.render.RenderUtil;
 import de.krien.twoDayZ.util.texture.TextureUtil;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.util.vector.Vector2f;
@@ -20,17 +17,23 @@ public class Player implements IGameEntity {
 
 	private final int DEFAULT_POSITION = 250; // Temporary
 	private final int DEFAULT_SIZE = 1;
-	private final int SNEAK_MOVEMENT_SPEED = 50;
-	private final int WALK_MOVEMENT_SPEED = 100;
-	private final int RUN_MOVEMENT_SPEED = 150;
+	private final int SNEAK_MOVEMENT_SPEED = 100;
+	private final int WALK_MOVEMENT_SPEED = 200;
+	private final int RUN_MOVEMENT_SPEED = 300;
 	private final double DEFAULT_ROTATION = 0;
 
 	private Vector2f position;
 	private float size;
 	private int movementSpeed;
 	private double rotation;
+
 	private Texture texture;
 	private PlayerMovement playerMovement;
+
+	private int verticesBufferID;
+	private int texturesBufferID;
+	private FloatBuffer vertices;
+	private FloatBuffer textures;
 
 	public Player() {
 		super();
@@ -40,6 +43,9 @@ public class Player implements IGameEntity {
 		this.rotation = DEFAULT_ROTATION;
 		this.texture = TextureUtil.loadPlayerImage(EPlayerModels.DEFAULT);
 		this.playerMovement = new PlayerMovement();
+
+		verticesBufferID = GL15.glGenBuffers();
+		texturesBufferID = GL15.glGenBuffers();
 	}
 
 	public Player(Vector2f position, float size, int movementSpeed, double rotation, Texture texture) {
@@ -55,12 +61,9 @@ public class Player implements IGameEntity {
 	public void update(float timeSinceLastGameLoop) {
 		MovementUtil.moveEntity(this, timeSinceLastGameLoop);
 		RotationUtil.rotateEntityToCursor(this);
-		createVertexVBO();
-		createTextureVBO();
+		vertices = RenderUtil.createVerticesVBO(verticesBufferID, texture, position);
+		textures = RenderUtil.createTextureVBO(texturesBufferID);
 	}
-
-	int vertexID = GL15.glGenBuffers();
-	int textureID = GL15.glGenBuffers();
 
 	@Override
 	public void draw() {
@@ -75,51 +78,17 @@ public class Player implements IGameEntity {
 			GL11.glRotatef((float)rotation, 0.0f, 0.0f, 1.0f); //TODO rotation zu float refactorn
 			GL11.glTranslatef(-position.getX(), -position.getY(), 0);
 
-			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vertexID);
+			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, verticesBufferID);
 			GL11.glVertexPointer(2, GL11.GL_FLOAT, 0, 0L);
-			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, textureID);
+			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, texturesBufferID);
 			GL11.glTexCoordPointer(2, GL11.GL_FLOAT, 0, 0L);
 
-			GL11.glDrawArrays(GL11.GL_QUADS, 0, vertex.limit());
+			GL11.glDrawArrays(GL11.GL_QUADS, 0, vertices.limit());
 		}
 		GL11.glPopMatrix();
 		GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
 		GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
 	}
-
-	FloatBuffer vertex;
-	private void createVertexVBO() {
-		float[] vertexData = {
-				-texture.getTextureWidth()/2 + position.getX(), 	-texture.getTextureHeight()/2 + position.getY(),
-				texture.getTextureWidth()/2 + position.getX(), 		-texture.getTextureHeight()/2 + position.getY(),
-				texture.getTextureWidth()/2 + position.getX(), 		texture.getTextureHeight()/2 + position.getY(),
-				-texture.getTextureWidth()/2 + position.getX(), 	texture.getTextureHeight()/2 + position.getY()
-		};
-		vertex = BufferUtils.createFloatBuffer(vertexData.length);
-		vertex.put(vertexData);
-		vertex.flip();
-
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vertexID);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vertex, GL15.GL_STATIC_DRAW);
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-	}
-
-	private void createTextureVBO() {
-		float[] textureData = {
-				0, 0,
-				1, 0,
-				1, 1,
-				0, 1
-		};
-		FloatBuffer texture = BufferUtils.createFloatBuffer(textureData.length);
-		texture.put(textureData);
-		texture.flip();
-
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, textureID);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, texture, GL15.GL_STATIC_DRAW);
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-	}
-
 
 	public void running() {
 		movementSpeed = RUN_MOVEMENT_SPEED;
