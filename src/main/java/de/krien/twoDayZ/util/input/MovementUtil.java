@@ -1,4 +1,4 @@
-package de.krien.twoDayZ.util.movement;
+package de.krien.twoDayZ.util.input;
 
 import de.krien.twoDayZ.model.player.Player;
 import org.lwjgl.input.Keyboard;
@@ -6,7 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class MovementUtil {
 
-	public static void moveEntity(Player player, float timeSinceLastGameLoop) {
+	public static void movePlayer(Player player, float timeSinceLastGameLoop) {
 		checkMovement(player);
 		doMovement(player, timeSinceLastGameLoop);
 	}

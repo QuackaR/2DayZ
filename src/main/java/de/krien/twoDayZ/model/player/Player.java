@@ -1,9 +1,10 @@
 package de.krien.twoDayZ.model.player;
 
 import de.krien.twoDayZ.model.AGameEntity;
-import de.krien.twoDayZ.util.movement.MovementUtil;
+import de.krien.twoDayZ.util.input.MouseUtil;
+import de.krien.twoDayZ.util.input.MovementUtil;
 import de.krien.twoDayZ.util.position.RotationUtil;
-import de.krien.twoDayZ.util.render.RenderUtil;
+import de.krien.twoDayZ.util.render.RenderGameObjectUtil;
 import de.krien.twoDayZ.util.texture.TextureUtil;
 
 public class Player extends AGameEntity {
@@ -23,10 +24,11 @@ public class Player extends AGameEntity {
 
     @Override
     public void update(float timeSinceLastGameLoop) {
-        MovementUtil.moveEntity(this, timeSinceLastGameLoop);
+        MovementUtil.movePlayer(this, timeSinceLastGameLoop);
         RotationUtil.rotateEntityToCursor(this);
-        vertices = RenderUtil.createVerticesVBO(verticesBufferID, texture, position);
-        textures = RenderUtil.createTextureVBO(texturesBufferID);
+        MouseUtil.checkMouseActions();
+        vertices = RenderGameObjectUtil.createVerticesVBO(verticesBufferID, texture, position);
+        textures = RenderGameObjectUtil.createTextureVBO(texturesBufferID);
     }
 
     public void running() {

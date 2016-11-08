@@ -9,7 +9,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import java.nio.FloatBuffer;
 
-public class RenderUtil {
+public class RenderGameObjectUtil {
 
     public static void drawGameObject(Texture texture, float size, Vector2f position, float rotation, int verticesBufferID, int texturesBufferID, int verticesCount) {
         GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
@@ -31,6 +31,7 @@ public class RenderUtil {
             GL11.glDrawArrays(GL11.GL_QUADS, 0, verticesCount);
         }
         GL11.glPopMatrix();
+        org.newdawn.slick.opengl.TextureImpl.bindNone();
         GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
         GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
     }

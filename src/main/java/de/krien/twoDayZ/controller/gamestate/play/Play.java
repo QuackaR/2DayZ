@@ -21,7 +21,8 @@ public class Play implements IGameState {
     public void update() {
         float timeSinceLastGameLoop = getTimeSinceLastGameLoop();
         List<AGameEntity> gameEntities = GameEntities.INSTANCE.getEntityList();
-        for(AGameEntity gameEntity : gameEntities) {
+        for(int i = 0; i < gameEntities.size(); i++) {
+            AGameEntity gameEntity = gameEntities.get(i);
             gameEntity.update(timeSinceLastGameLoop);
         }
     }
