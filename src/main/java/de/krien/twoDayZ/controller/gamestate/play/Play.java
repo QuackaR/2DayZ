@@ -2,7 +2,7 @@ package de.krien.twoDayZ.controller.gamestate.play;
 
 import de.krien.twoDayZ.controller.gamestate.IGameState;
 import de.krien.twoDayZ.model.GameEntities;
-import de.krien.twoDayZ.model.IGameEntity;
+import de.krien.twoDayZ.model.AGameEntity;
 import de.krien.twoDayZ.util.debug.Stats;
 
 import java.util.List;
@@ -20,16 +20,16 @@ public class Play implements IGameState {
 
     public void update() {
         float timeSinceLastGameLoop = getTimeSinceLastGameLoop();
-        List<IGameEntity> gameEntities = GameEntities.INSTANCE.getEntityList();
-        for(IGameEntity gameEntity : gameEntities) {
+        List<AGameEntity> gameEntities = GameEntities.INSTANCE.getEntityList();
+        for(AGameEntity gameEntity : gameEntities) {
             gameEntity.update(timeSinceLastGameLoop);
         }
     }
 
 
     public void draw() {
-        List<IGameEntity> gameEntities = GameEntities.INSTANCE.getEntityList();
-        for(IGameEntity gameEntity : gameEntities) {
+        List<AGameEntity> gameEntities = GameEntities.INSTANCE.getEntityList();
+        for(AGameEntity gameEntity : gameEntities) {
             gameEntity.draw();
         }
         stats.draw();

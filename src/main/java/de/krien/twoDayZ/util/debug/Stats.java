@@ -1,11 +1,10 @@
 package de.krien.twoDayZ.util.debug;
 
 import de.krien.twoDayZ.model.GameEntities;
-import de.krien.twoDayZ.model.IGameEntity;
+import de.krien.twoDayZ.model.AGameEntity;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -45,7 +44,7 @@ public class Stats {
         }
 
         private void drawPlayerPosition() {
-            IGameEntity player = GameEntities.INSTANCE.getEntityList().get(0);
+            AGameEntity player = GameEntities.INSTANCE.getEntityList().get(0);
             Vector2f position = new Vector2f(player.getPosition().getX(), player.getPosition().getY());
             float positionX = Math.round(position.getX()* 100f) / 100f;
             float positionY = Math.round(position.getY()* 100f) / 100f;

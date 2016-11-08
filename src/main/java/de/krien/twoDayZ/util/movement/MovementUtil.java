@@ -47,25 +47,25 @@ public class MovementUtil {
 
 	private static void doMovement(Player player, float timeSinceLastGameLoop) {
 		if (player.getPlayerMovement().isMoveRight()) {
-			float diffX = player.getMovementSpeed() * timeSinceLastGameLoop;
+			float diffX = player.getSpeed() * timeSinceLastGameLoop;
 			Vector2f newPosition = new Vector2f(player.getPosition().getX() + diffX, player.getPosition().getY());
 			player.setPosition(newPosition);
 		}
 
 		if (player.getPlayerMovement().isMoveLeft()) {
-			float diffX = player.getMovementSpeed() * timeSinceLastGameLoop;
+			float diffX = player.getSpeed() * timeSinceLastGameLoop;
 			Vector2f newPosition = new Vector2f(player.getPosition().getX() - diffX, player.getPosition().getY());
 			player.setPosition(newPosition);
 		}
 
 		if (player.getPlayerMovement().isMoveDown()) {
-			float diffY = player.getMovementSpeed() * timeSinceLastGameLoop;
+			float diffY = player.getSpeed() * timeSinceLastGameLoop;
 			Vector2f newPosition = new Vector2f(player.getPosition().getX(), player.getPosition().getY() + diffY);
 			player.setPosition(newPosition);
 		}
 
 		if (player.getPlayerMovement().isMoveUp()) {
-			float diffY = player.getMovementSpeed() * timeSinceLastGameLoop;
+			float diffY = player.getSpeed() * timeSinceLastGameLoop;
 			Vector2f newPosition = new Vector2f(player.getPosition().getX(), player.getPosition().getY() - diffY);
 			player.setPosition(newPosition);
 		}

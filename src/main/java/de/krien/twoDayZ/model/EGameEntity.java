@@ -6,13 +6,13 @@ public enum EGameEntity {
 
 	PLAYER(Player.class), NPC(null), ACTIVE_OBJECT(null), PASSIVE_OBJECT(null);
 
-	private Class<? extends IGameEntity> entityClass;
+	private Class<? extends AGameEntity> entityClass;
 
-	private EGameEntity(Class<? extends IGameEntity> entityClass) {
+	private EGameEntity(Class<? extends AGameEntity> entityClass) {
 		this.entityClass = entityClass;
 	}
 
-	public Class<? extends IGameEntity> getEntityClass() {
+	public Class<? extends AGameEntity> getEntityClass() {
 		return entityClass;
 	}
 
