@@ -1,4 +1,4 @@
-package de.krien.twoDayZ.util.debug;
+package de.krien.twoDayZ.model.ui.stats;
 
 import java.awt.Font;
 
@@ -8,10 +8,11 @@ import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
-import de.krien.twoDayZ.model.AGameEntity;
-import de.krien.twoDayZ.model.GameEntities;
+import de.krien.twoDayZ.model.game.AGameEntity;
+import de.krien.twoDayZ.model.game.GameEntities;
+import de.krien.twoDayZ.model.ui.AUIEntity;
 
-public class Stats {
+public class Stats extends AUIEntity {
 
         private Font font;
         private TrueTypeFont typeFont;
@@ -25,7 +26,12 @@ public class Stats {
             typeFont = new TrueTypeFont(font, false);
             lastFrameTime = getTime();
         }
+        
+        @Override
+        public void update(float timeSinceLastGameLoop) {
+        }
 
+        @Override
         public void draw() {
             drawFps();
             drawCursorPosition();

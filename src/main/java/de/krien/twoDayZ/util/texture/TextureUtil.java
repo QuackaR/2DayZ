@@ -6,7 +6,7 @@ import java.net.URL;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-import de.krien.twoDayZ.model.IGameEntityModel;
+import de.krien.twoDayZ.model.game.IGameEntityModel;
 
 public class TextureUtil {
 
@@ -16,7 +16,6 @@ public class TextureUtil {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         String fileName = model.getModelID() + "." + IMAGE_TYPE.toLowerCase();
         URL path = loader.getResource(model.getType() + "/" + fileName);
-        System.out.println(model.getType() + "/" + fileName);
         try {
             return TextureLoader.getTexture(IMAGE_TYPE, path.openStream());
         } catch (IOException e) {

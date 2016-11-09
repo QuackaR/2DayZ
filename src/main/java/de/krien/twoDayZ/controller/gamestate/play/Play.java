@@ -3,9 +3,10 @@ package de.krien.twoDayZ.controller.gamestate.play;
 import java.util.List;
 
 import de.krien.twoDayZ.controller.gamestate.IGameState;
-import de.krien.twoDayZ.model.AGameEntity;
-import de.krien.twoDayZ.model.GameEntities;
-import de.krien.twoDayZ.util.debug.Stats;
+import de.krien.twoDayZ.model.game.AGameEntity;
+import de.krien.twoDayZ.model.game.GameEntities;
+import de.krien.twoDayZ.model.ui.AUIEntity;
+import de.krien.twoDayZ.model.ui.UIEntities;
 
 public class Play implements IGameState {
 
@@ -13,28 +14,49 @@ public class Play implements IGameState {
 
     public Play() {
     }
-    Stats stats;
+    
     public void init() {
-        stats = new Stats();
     }
 
     public void update() {
         float timeSinceLastGameLoop = getTimeSinceLastGameLoop();
-        List<AGameEntity> gameEntities = GameEntities.INSTANCE.getEntityList();
-        for(int i = 0; i < gameEntities.size(); i++) {
-            AGameEntity gameEntity = gameEntities.get(i);
-            gameEntity.update(timeSinceLastGameLoop);
-        }
+        updateGameEntities(timeSinceLastGameLoop);
+        updateUIEntities(timeSinceLastGameLoop);
     }
-
-
+    
     public void draw() {
-        List<AGameEntity> gameEntities = GameEntities.INSTANCE.getEntityList();
-        for(AGameEntity gameEntity : gameEntities) {
-            gameEntity.draw();
-        }
-        stats.draw();
+        drawGameEntities();
+        drawUIEntities();
     }
+    
+    private void updateGameEntities(float timeSinceLastGameLoop) {
+		List<AGameEntity> gameEntities = GameEntities.INSTANCE.getEntityList();
+        for(int i = 0; i < gameEntities.size(); i++) {
+            gameEntities.get(i).update(timeSinceLastGameLoop);
+        }
+	}
+
+	private void updateUIEntities(float timeSinceLastGameLoop) {
+		List<AUIEntity> uiEntities = UIEntities.INSTANCE.getEntityList();
+        for(int i = 0; i < uiEntities.size(); i++) {
+        	uiEntities.get(i).update(timeSinceLastGameLoop);
+        }
+	}
+	
+	private void drawGameEntities() {
+		List<AGameEntity> gameEntities = GameEntities.INSTANCE.getEntityList();
+        for(int i = 0; i < gameEntities.size(); i++) {
+        	gameEntities.get(i).draw();
+        }
+	}
+
+	private void drawUIEntities() {
+		List<AUIEntity> uiEntities = UIEntities.INSTANCE.getEntityList();
+		System.out.println(uiEntities.size());
+        for(int i = 0; i < uiEntities.size(); i++) {
+        	uiEntities.get(i).draw();
+        }
+	}
 
     private float getTimeSinceLastGameLoop() {
         long timeOfThisGameLoop = System.nanoTime();

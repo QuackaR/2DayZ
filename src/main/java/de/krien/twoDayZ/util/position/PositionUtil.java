@@ -2,7 +2,7 @@ package de.krien.twoDayZ.util.position;
 
 import org.lwjgl.util.vector.Vector2f;
 
-import de.krien.twoDayZ.model.AGameEntity;
+import de.krien.twoDayZ.model.game.AGameEntity;
 
 public class PositionUtil {
 

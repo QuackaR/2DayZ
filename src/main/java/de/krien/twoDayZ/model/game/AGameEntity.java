@@ -1,4 +1,4 @@
-package de.krien.twoDayZ.model;
+package de.krien.twoDayZ.model.game;
 
 import java.nio.FloatBuffer;
 
@@ -7,7 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.opengl.Texture;
 
 import de.krien.twoDayZ.util.debug.EDebugModels;
-import de.krien.twoDayZ.util.render.RenderGameObjectUtil;
+import de.krien.twoDayZ.util.render.RenderUtil;
 import de.krien.twoDayZ.util.texture.TextureUtil;
 
 public class AGameEntity {
@@ -43,12 +43,12 @@ public class AGameEntity {
         if(texture == null) { // TODO Performance?
             this.texture = TextureUtil.loadGameEntityImage(DEFAULT_TEXTURE);
         }
-        vertices = RenderGameObjectUtil.createVerticesVBO(verticesBufferID, texture, position);
-        textures = RenderGameObjectUtil.createTextureVBO(texturesBufferID);
+        vertices = RenderUtil.createVerticesVBO(verticesBufferID, texture, position);
+        textures = RenderUtil.createTextureVBO(texturesBufferID);
     }
 
     public void draw() {
-        RenderGameObjectUtil.drawGameObject(
+        RenderUtil.drawGameObject(
                 texture,
                 size,
                 position,

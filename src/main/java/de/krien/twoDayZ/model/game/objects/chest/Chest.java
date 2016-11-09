@@ -1,6 +1,6 @@
-package de.krien.twoDayZ.model.objects.chest;
+package de.krien.twoDayZ.model.game.objects.chest;
 
-import de.krien.twoDayZ.model.AGameEntity;
+import de.krien.twoDayZ.model.game.AGameEntity;
 import de.krien.twoDayZ.util.texture.TextureUtil;
 
 public class Chest extends AGameEntity {

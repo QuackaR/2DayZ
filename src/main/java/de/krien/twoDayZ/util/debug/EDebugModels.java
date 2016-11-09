@@ -1,6 +1,6 @@
 package de.krien.twoDayZ.util.debug;
 
-import de.krien.twoDayZ.model.IGameEntityModel;
+import de.krien.twoDayZ.model.game.IGameEntityModel;
 
 
 public enum EDebugModels implements IGameEntityModel {

@@ -1,13 +1,12 @@
-package de.krien.twoDayZ.model;
+package de.krien.twoDayZ.model.game;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.util.vector.Vector2f;
 
-import de.krien.twoDayZ.model.objects.chest.Chest;
-import de.krien.twoDayZ.model.player.Player;
-
+import de.krien.twoDayZ.model.game.objects.chest.Chest;
+import de.krien.twoDayZ.model.game.player.Player;
 
 public enum GameEntities {
 
@@ -18,7 +17,7 @@ public enum GameEntities {
 	private GameEntities() {
 		entityList = new ArrayList<>();
 
-		//TODO TMP
+		// TODO TMP
 		Player player = new Player();
 		player.setPosition(new Vector2f(250, 250));
 		entityList.add(player);
@@ -34,6 +33,14 @@ public enum GameEntities {
 
 	public void setEntityList(List<AGameEntity> entityList) {
 		this.entityList = entityList;
+	}
+
+	public void addEntity(AGameEntity entity) {
+		entityList.add(entity);
+	}
+
+	public void removeEntity(AGameEntity entity) {
+		entityList.remove(entity);
 	}
 
 }

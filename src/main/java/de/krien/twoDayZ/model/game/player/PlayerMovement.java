@@ -1,4 +1,4 @@
-package de.krien.twoDayZ.model.player;
+package de.krien.twoDayZ.model.game.player;
 
 public class PlayerMovement {
 

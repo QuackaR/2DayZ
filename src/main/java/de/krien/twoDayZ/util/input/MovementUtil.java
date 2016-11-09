@@ -3,7 +3,7 @@ package de.krien.twoDayZ.util.input;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 
-import de.krien.twoDayZ.model.player.Player;
+import de.krien.twoDayZ.model.game.player.Player;
 
 public class MovementUtil {
 

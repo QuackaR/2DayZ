@@ -1,6 +1,6 @@
-package de.krien.twoDayZ.model.objects.chest;
+package de.krien.twoDayZ.model.game.objects.chest;
 
-import de.krien.twoDayZ.model.IGameEntityModel;
+import de.krien.twoDayZ.model.game.IGameEntityModel;
 
 public enum EChestModels implements IGameEntityModel {
 

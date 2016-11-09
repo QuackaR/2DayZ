@@ -1,4 +1,4 @@
-package de.krien.twoDayZ.model;
+package de.krien.twoDayZ.model.game;
 
 public interface IGameEntityModel {
 

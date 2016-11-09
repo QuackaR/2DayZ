@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 
-import de.krien.twoDayZ.model.AGameEntity;
+import de.krien.twoDayZ.model.game.AGameEntity;
 
 public class RotationUtil {
 	

@@ -4,9 +4,9 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
-import de.krien.twoDayZ.model.AGameEntity;
-import de.krien.twoDayZ.model.GameEntities;
-import de.krien.twoDayZ.model.menu.ContextMenu;
+import de.krien.twoDayZ.model.ui.AUIEntity;
+import de.krien.twoDayZ.model.ui.UIEntities;
+import de.krien.twoDayZ.model.ui.menu.ContextMenu;
 
 public class MouseUtil {
 
@@ -20,14 +20,14 @@ public class MouseUtil {
                 } else if (Mouse.getEventButton() == 1) {
                     Vector2f eventPosition = new Vector2f(Mouse.getEventX(), Display.getHeight() - Mouse.getEventY());
                     boolean activeMenu = false;
-                    for (AGameEntity entity : GameEntities.INSTANCE.getEntityList()) {
+                    for (AUIEntity entity : UIEntities.INSTANCE.getEntityList()) {
                         if (entity instanceof ContextMenu) {
                             entity.setPosition(eventPosition);
                             activeMenu = true;
                         }
                     }
                     if (!activeMenu) {
-                        GameEntities.INSTANCE.getEntityList().add(new ContextMenu(eventPosition));
+                    	UIEntities.INSTANCE.addEntity(new ContextMenu(eventPosition));
                     }
                     System.out.println("Right mouse button pressed at " + eventPosition.getX() + "/" + eventPosition.getY());
                 }
