@@ -1,5 +1,8 @@
 package de.krien.twoDayZ.util.input;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -27,7 +30,11 @@ public class MouseUtil {
                         }
                     }
                     if (!activeMenu) {
-                    	UIEntities.INSTANCE.addEntity(new ContextMenu(eventPosition));
+                    	List<String> menuEntries = new ArrayList<>();
+                    	menuEntries.add("Test1");
+                    	menuEntries.add("Example2");
+                    	menuEntries.add("Option3");
+                    	UIEntities.INSTANCE.addEntity(new ContextMenu(eventPosition, menuEntries));
                     }
                     System.out.println("Right mouse button pressed at " + eventPosition.getX() + "/" + eventPosition.getY());
                 }

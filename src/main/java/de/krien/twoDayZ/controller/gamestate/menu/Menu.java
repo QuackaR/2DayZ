@@ -39,10 +39,10 @@ public class Menu implements IGameState {
         int displayHeight = Display.getHeight();
 
         int textWidth = TextUtil.getInstance().getFont().getWidth(menuEntry.getText());
-        int textHight = TextUtil.getInstance().getFont().getHeight(menuEntry.getText());
+        int textHeight = TextUtil.getInstance().getFont().getHeight(menuEntry.getText());
 
         float positionX = (displayWidth / 2) - (textWidth / 2);
-        float positionY = (displayHeight / 2) - (textHight / 2);
+        float positionY = (displayHeight / 2) - (textHeight / 2);
 
         int menuEntriesCount = EMainMenuEntry.values().length + 1;
         float midPosition = menuEntriesCount / 2;

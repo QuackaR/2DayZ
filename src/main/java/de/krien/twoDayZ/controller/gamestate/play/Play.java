@@ -52,7 +52,6 @@ public class Play implements IGameState {
 
 	private void drawUIEntities() {
 		List<AUIEntity> uiEntities = UIEntities.INSTANCE.getEntityList();
-		System.out.println(uiEntities.size());
         for(int i = 0; i < uiEntities.size(); i++) {
         	uiEntities.get(i).draw();
         }
