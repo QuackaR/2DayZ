@@ -1,11 +1,12 @@
 package de.krien.twoDayZ.model;
 
-import de.krien.twoDayZ.model.objects.chest.Chest;
-import de.krien.twoDayZ.model.player.Player;
-import org.lwjgl.util.vector.Vector2f;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.lwjgl.util.vector.Vector2f;
+
+import de.krien.twoDayZ.model.objects.chest.Chest;
+import de.krien.twoDayZ.model.player.Player;
 
 
 public enum GameEntities {

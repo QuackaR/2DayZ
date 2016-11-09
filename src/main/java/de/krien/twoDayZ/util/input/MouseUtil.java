@@ -1,11 +1,12 @@
 package de.krien.twoDayZ.util.input;
 
-import de.krien.twoDayZ.model.AGameEntity;
-import de.krien.twoDayZ.model.GameEntities;
-import de.krien.twoDayZ.model.menu.ContextMenu;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
+
+import de.krien.twoDayZ.model.AGameEntity;
+import de.krien.twoDayZ.model.GameEntities;
+import de.krien.twoDayZ.model.menu.ContextMenu;
 
 public class MouseUtil {
 

@@ -1,13 +1,14 @@
 package de.krien.twoDayZ.model;
 
-import de.krien.twoDayZ.util.debug.EDebugModels;
-import de.krien.twoDayZ.util.render.RenderGameObjectUtil;
-import de.krien.twoDayZ.util.texture.TextureUtil;
+import java.nio.FloatBuffer;
+
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.opengl.Texture;
 
-import java.nio.FloatBuffer;
+import de.krien.twoDayZ.util.debug.EDebugModels;
+import de.krien.twoDayZ.util.render.RenderGameObjectUtil;
+import de.krien.twoDayZ.util.texture.TextureUtil;
 
 public class AGameEntity {
 

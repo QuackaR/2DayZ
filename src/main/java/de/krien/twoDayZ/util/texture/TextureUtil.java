@@ -1,16 +1,12 @@
 package de.krien.twoDayZ.util.texture;
 
-import de.krien.twoDayZ.model.IGameEntityModel;
-import de.krien.twoDayZ.model.player.EPlayerModels;
-import org.lwjgl.Sys;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+
+import de.krien.twoDayZ.model.IGameEntityModel;
 
 public class TextureUtil {
 
@@ -20,6 +16,7 @@ public class TextureUtil {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         String fileName = model.getModelID() + "." + IMAGE_TYPE.toLowerCase();
         URL path = loader.getResource(model.getType() + "/" + fileName);
+        System.out.println(model.getType() + "/" + fileName);
         try {
             return TextureLoader.getTexture(IMAGE_TYPE, path.openStream());
         } catch (IOException e) {

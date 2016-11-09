@@ -1,9 +1,10 @@
 package de.krien.twoDayZ.controller;
 
+import org.lwjgl.opengl.Display;
+
 import de.krien.twoDayZ.controller.gamestate.EGameState;
 import de.krien.twoDayZ.controller.gamestate.play.Play;
 import de.krien.twoDayZ.view.window.Window;
-import org.lwjgl.opengl.Display;
 
 public class Game {
 

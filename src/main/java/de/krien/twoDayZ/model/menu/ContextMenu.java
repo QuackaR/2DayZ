@@ -1,8 +1,9 @@
 package de.krien.twoDayZ.model.menu;
 
+import org.lwjgl.util.vector.Vector2f;
+
 import de.krien.twoDayZ.model.AGameEntity;
 import de.krien.twoDayZ.util.render.RenderContextMenuUtil;
-import org.lwjgl.util.vector.Vector2f;
 
 public class ContextMenu extends AGameEntity {
 

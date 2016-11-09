@@ -1,8 +1,9 @@
 package de.krien.twoDayZ.util.input;
 
-import de.krien.twoDayZ.model.player.Player;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
+
+import de.krien.twoDayZ.model.player.Player;
 
 public class MovementUtil {
 

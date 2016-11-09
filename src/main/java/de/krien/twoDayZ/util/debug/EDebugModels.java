@@ -16,11 +16,11 @@ public enum EDebugModels implements IGameEntityModel {
 
     @Override
     public String getModelID() {
-        return null;
+        return modelID;
     }
 
     @Override
     public String getType() {
-        return null;
+        return type;
     }
 }

@@ -1,14 +1,15 @@
 package de.krien.twoDayZ.util.debug;
 
-import de.krien.twoDayZ.model.GameEntities;
-import de.krien.twoDayZ.model.AGameEntity;
+import java.awt.Font;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
-import java.awt.Font;
+import de.krien.twoDayZ.model.AGameEntity;
+import de.krien.twoDayZ.model.GameEntities;
 
 public class Stats {
 

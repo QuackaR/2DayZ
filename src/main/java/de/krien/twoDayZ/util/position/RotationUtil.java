@@ -1,11 +1,12 @@
 package de.krien.twoDayZ.util.position;
 
-import de.krien.twoDayZ.model.AGameEntity;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
+
+import de.krien.twoDayZ.model.AGameEntity;
 
 public class RotationUtil {
 	

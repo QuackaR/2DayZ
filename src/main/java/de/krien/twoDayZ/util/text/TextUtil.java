@@ -1,9 +1,9 @@
 package de.krien.twoDayZ.util.text;
 
+import java.awt.Font;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
-
-import java.awt.*;
 
 public class TextUtil {
 

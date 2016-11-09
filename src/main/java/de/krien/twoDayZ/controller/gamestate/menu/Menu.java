@@ -1,12 +1,13 @@
 package de.krien.twoDayZ.controller.gamestate.menu;
 
-import de.krien.twoDayZ.controller.gamestate.IGameState;
-import de.krien.twoDayZ.controller.gamestate.menu.mainMenu.EMainMenuEntry;
-import de.krien.twoDayZ.util.text.TextUtil;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Vector2f;
+
+import de.krien.twoDayZ.controller.gamestate.IGameState;
+import de.krien.twoDayZ.controller.gamestate.menu.mainMenu.EMainMenuEntry;
+import de.krien.twoDayZ.util.text.TextUtil;
 
 public class Menu implements IGameState {
 

@@ -1,13 +1,13 @@
 package de.krien.twoDayZ.util.render;
 
+import java.nio.FloatBuffer;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
-
-import java.nio.FloatBuffer;
 
 public class RenderGameObjectUtil {
 
