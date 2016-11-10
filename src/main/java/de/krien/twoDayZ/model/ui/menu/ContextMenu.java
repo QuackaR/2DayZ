@@ -15,20 +15,23 @@ public class ContextMenu extends AUIEntity implements IClickableEntity {
 
 	private final static float DEFAULT_WIDTH = 100;
 	private final static float DEFAULT_HEIGHT = 25;
-	private final static Color DEFAULT_COLOR = Color.gray;
+	private final static Color DEFAULT_MENU_COLOR = Color.gray;
+	private final static Color DEFAULT_TEXT_COLOR = Color.black;
 	
+	private Color textColor;
     private Font font;
     private TrueTypeFont typeFont;
 	private List<IContextMenuEntry> entries;
 	
 	public ContextMenu(Vector2f position, List<IContextMenuEntry> entries) {
 		super();
-		this.color = DEFAULT_COLOR;
+		this.textColor = DEFAULT_TEXT_COLOR;
+		this.color = DEFAULT_MENU_COLOR;
 		this.position = position;
 		this.size = new Vector2f(DEFAULT_WIDTH, DEFAULT_HEIGHT * entries.size());
 		this.entries = entries;
 		
-        font = new Font("Times New Roman", Font.BOLD, 16);
+        font = new Font("Arial", Font.PLAIN, 12);
         typeFont = new TrueTypeFont(font, false);
 	}
 	
@@ -38,7 +41,7 @@ public class ContextMenu extends AUIEntity implements IClickableEntity {
 		for(int i = 0; i < entries.size(); i++) {
 			String entry = entries.get(i).getText();
 			Vector2f position = getEntryPosition(i);
-			typeFont.drawString(position.getX(), position.getY(), entry, Color.red);
+			typeFont.drawString(position.getX(), position.getY(), entry, textColor);
 		}
 	}
 	
