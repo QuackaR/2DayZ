@@ -1,15 +1,15 @@
 package de.krien.twoDayZ.util.input;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
+import de.krien.twoDayZ.model.AEntity;
+import de.krien.twoDayZ.model.IClickableEntity;
+import de.krien.twoDayZ.model.game.AGameEntity;
+import de.krien.twoDayZ.model.game.GameEntities;
 import de.krien.twoDayZ.model.ui.AUIEntity;
 import de.krien.twoDayZ.model.ui.UIEntities;
-import de.krien.twoDayZ.model.ui.menu.ContextMenu;
 
 public class MouseUtil {
 
@@ -17,28 +17,40 @@ public class MouseUtil {
     public static void checkMouseActions() {
         while (Mouse.next()) {
             if (Mouse.getEventButtonState()) {
-                if (Mouse.getEventButton() == 0) {
-                    Vector2f eventPosition = new Vector2f(Mouse.getEventX(), Mouse.getEventY());
-                    System.out.println("Left mouse button pressed at " + eventPosition.getX() + "/" + eventPosition.getY());
-                } else if (Mouse.getEventButton() == 1) {
                     Vector2f eventPosition = new Vector2f(Mouse.getEventX(), Display.getHeight() - Mouse.getEventY());
-                    boolean activeMenu = false;
-                    for (AUIEntity entity : UIEntities.INSTANCE.getEntityList()) {
-                        if (entity instanceof ContextMenu) {
-                            entity.setPosition(eventPosition);
-                            activeMenu = true;
-                        }
+                    AEntity clickedEntity = getClickedEntity(eventPosition);
+                    if(clickedEntity != null && clickedEntity instanceof IClickableEntity && clickedEntity instanceof AUIEntity && Mouse.getEventButton() == 0) {
+                    	((IClickableEntity)clickedEntity).clicked(eventPosition);
+                    } else if(clickedEntity != null && clickedEntity instanceof IClickableEntity && clickedEntity instanceof AGameEntity && Mouse.getEventButton() == 1) {
+                    	((IClickableEntity)clickedEntity).clicked(eventPosition);
                     }
-                    if (!activeMenu) {
-                    	List<String> menuEntries = new ArrayList<>();
-                    	menuEntries.add("Test1");
-                    	menuEntries.add("Example2");
-                    	menuEntries.add("Option3");
-                    	UIEntities.INSTANCE.addEntity(new ContextMenu(eventPosition, menuEntries));
-                    }
-                    System.out.println("Right mouse button pressed at " + eventPosition.getX() + "/" + eventPosition.getY());
-                }
             }
         }
     }
+
+	private static AEntity getClickedEntity(Vector2f eventPosition) {
+		for(AEntity entity : UIEntities.INSTANCE.getEntityList()) {
+		 	if(entity.getPosition() != null && entity.getSize() != null
+		 			&& eventPosition.getX() >= entity.getPosition().getX()
+					&& eventPosition.getX() <= (entity.getPosition().getX() + entity.getSize().getX())
+					&& eventPosition.getY() >= entity.getPosition().getY()
+					&& eventPosition.getY() <= (entity.getPosition().getY() + entity.getSize().getY())
+			) {
+				return entity;
+			}
+		}
+		for(AEntity entity : GameEntities.INSTANCE.getEntityList()) {
+			float halfSizeX = entity.getSize().getX() / 2;
+			float halfSizeY = entity.getSize().getY() / 2;
+		 	if(entity.getPosition() != null && entity.getSize() != null
+		 			&& eventPosition.getX() >= entity.getPosition().getX() - halfSizeX
+					&& eventPosition.getX() <= (entity.getPosition().getX() + halfSizeX)
+					&& eventPosition.getY() >= entity.getPosition().getY() - halfSizeY
+					&& eventPosition.getY() <= (entity.getPosition().getY() + halfSizeY)
+			) {
+				return entity;
+			}
+		}
+		return null;
+	}
 }

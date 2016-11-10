@@ -6,20 +6,20 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.opengl.Texture;
 
+import de.krien.twoDayZ.model.AEntity;
 import de.krien.twoDayZ.util.debug.EDebugModels;
 import de.krien.twoDayZ.util.render.RenderUtil;
 import de.krien.twoDayZ.util.texture.TextureUtil;
 
-public class AGameEntity {
+public class AGameEntity extends AEntity{
 
     private final Vector2f DEFAULT_POSITION = new Vector2f(0, 0);
-    private final float DEFAULT_SIZE = 1.0f;
+    private final float DEFAULT_SCALE = 1.0f;
     private final float DEFAULT_SPEED = 0.0f;
     private final float DEFAULT_ROTATION = 0.0f;
     private final EDebugModels DEFAULT_TEXTURE = EDebugModels.NOT_FOUND;
 
-    public Vector2f position;
-    public float size;
+    public float scale;
     public float speed;
     public float rotation;
     public Texture texture;
@@ -31,7 +31,7 @@ public class AGameEntity {
 
     public AGameEntity() {
         this.position = DEFAULT_POSITION;
-        this.size = DEFAULT_SIZE;
+        this.scale = DEFAULT_SCALE;
         this.speed = DEFAULT_SPEED;
         this.rotation = DEFAULT_ROTATION;
 
@@ -50,7 +50,7 @@ public class AGameEntity {
     public void draw() {
         RenderUtil.drawGameObject(
                 texture,
-                size,
+                scale,
                 position,
                 (float) rotation,
                 verticesBufferID,
@@ -58,20 +58,12 @@ public class AGameEntity {
                 vertices.limit());
     }
 
-    public Vector2f getPosition() {
-        return position;
+    public float getScale() {
+        return scale;
     }
 
-    public void setPosition(Vector2f position) {
-        this.position = position;
-    }
-
-    public float getSize() {
-        return size;
-    }
-
-    public void setSize(float size) {
-        this.size = size;
+    public void setScale(float scale) {
+        this.scale = scale;
     }
 
     public float getSpeed() {
@@ -96,5 +88,10 @@ public class AGameEntity {
 
     public void setTexture(Texture texture) {
         this.texture = texture;
+    }
+    
+    @Override
+    public Vector2f getSize() {
+    	return new Vector2f(texture.getImageWidth(), texture.getImageHeight());
     }
 }

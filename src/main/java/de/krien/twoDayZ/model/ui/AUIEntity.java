@@ -7,12 +7,11 @@ import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
+import de.krien.twoDayZ.model.AEntity;
 import de.krien.twoDayZ.util.render.RenderUtil;
 
-public class AUIEntity {
+public class AUIEntity extends AEntity {
 
-	public Vector2f position;
-	public Vector2f size;
 	public Texture texture;
 	public Color color;
 
@@ -61,22 +60,6 @@ public class AUIEntity {
 		} else if (color != null) {
 			RenderUtil.drawUIObject(verticesBufferID, colorBufferID, vertices.limit());
 		}
-	}
-
-	public Vector2f getPosition() {
-		return position;
-	}
-
-	public void setPosition(Vector2f position) {
-		this.position = position;
-	}
-
-	public Vector2f getSize() {
-		return size;
-	}
-
-	public void setSize(Vector2f size) {
-		this.size = size;
 	}
 
 	public Texture getTexture() {
