@@ -6,16 +6,19 @@ import java.net.URL;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-import de.krien.twoDayZ.model.game.IGameEntityModel;
+import de.krien.twoDayZ.model.IEntityModel;
 
 public class TextureUtil {
 
     private final static String IMAGE_TYPE = "PNG";
 
-    public static Texture loadGameEntityImage(IGameEntityModel model) {
+    public static Texture loadEntityImage(IEntityModel model) {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         String fileName = model.getModelID() + "." + IMAGE_TYPE.toLowerCase();
         URL path = loader.getResource(model.getType() + "/" + fileName);
+        if(path == null) {
+            path = loader.getResource("resources/" + model.getType() + "/" + fileName);
+        }
         try {
             return TextureLoader.getTexture(IMAGE_TYPE, path.openStream());
         } catch (IOException e) {

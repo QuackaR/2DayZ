@@ -10,7 +10,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
 public class RenderUtil {
-
+	
     public static void drawGameObject(Texture texture, float size, Vector2f position, float rotation, int verticesBufferID, int texturesBufferID, int verticesCount) {
         GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
         GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
@@ -35,7 +35,7 @@ public class RenderUtil {
         GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
     }
     
-    public static void drawUIObject(Texture texture, int verticesBufferID, int texturesBufferID, int verticesCount) {
+    public static void drawUIObject(int verticesBufferID, int texturesBufferID, int verticesCount, Texture texture) {
         GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
         GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
         Color.white.bind();
@@ -91,6 +91,26 @@ public class RenderUtil {
 
         return vertices;
     }
+    
+    /*public static FloatBuffer createVerticesVBO(int bufferID, Vector2f size, Vector2f position) {
+        float[] vertexData = {
+                -size.getX()/2 + position.getX(), 	-size.getY()/2 + position.getY(),
+                size.getX()/2 + position.getX(), 	-size.getY()/2 + position.getY(),
+                size.getX()/2 + position.getX(), 	size.getY()/2 + position.getY(),
+                -size.getX()/2 + position.getX(), 	size.getY()/2 + position.getY()
+        };
+
+        FloatBuffer vertices;
+        vertices = BufferUtils.createFloatBuffer(vertexData.length);
+        vertices.put(vertexData);
+        vertices.flip();
+
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, bufferID);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vertices, GL15.GL_STATIC_DRAW);
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+
+        return vertices;
+    }*/
     
     public static FloatBuffer createVerticesVBO(int bufferID, Vector2f position, Vector2f size) {
         float[] vertexData = {
@@ -151,4 +171,7 @@ public class RenderUtil {
 
         return textures;
     }
+    
+    
+    
 }

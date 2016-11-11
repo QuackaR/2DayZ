@@ -18,7 +18,7 @@ public class Player extends AGameEntity {
     public Player() {
         super();
         this.speed = WALK_MOVEMENT_SPEED;
-        this.texture = TextureUtil.loadGameEntityImage(EPlayerModels.DEFAULT);
+        this.texture = TextureUtil.loadEntityImage(EPlayerModels.DEFAULT);
         this.playerMovement = new PlayerMovement();
     }
 

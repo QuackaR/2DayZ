@@ -41,7 +41,7 @@ public class AGameEntity extends AEntity{
 
     public void update(float timeSinceLastGameLoop) {
         if(texture == null) { // TODO Performance?
-            this.texture = TextureUtil.loadGameEntityImage(DEFAULT_TEXTURE);
+            this.texture = TextureUtil.loadEntityImage(DEFAULT_TEXTURE);
         }
         vertices = RenderUtil.createVerticesVBO(verticesBufferID, texture, position);
         textures = RenderUtil.createTextureVBO(texturesBufferID);

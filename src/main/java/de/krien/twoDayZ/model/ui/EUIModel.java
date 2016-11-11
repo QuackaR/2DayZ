@@ -1,26 +1,23 @@
-package de.krien.twoDayZ.util.debug;
+package de.krien.twoDayZ.model.ui;
 
 import de.krien.twoDayZ.model.IEntityModel;
 
+public enum EUIModel implements IEntityModel {
 
-public enum EDebugModels implements IEntityModel {
+    MENU("MENU");
 
-    NOT_FOUND("NOT_FOUND");
-
-    private static final String type = "debug";
+    private static final String type = "ui";
     private String modelID;
 
-    EDebugModels(String modelID) {
+    EUIModel(String modelID) {
         this.modelID = modelID;
     }
 
-    @Override
     public String getModelID() {
         return modelID;
     }
-
-    @Override
     public String getType() {
         return type;
     }
+	
 }

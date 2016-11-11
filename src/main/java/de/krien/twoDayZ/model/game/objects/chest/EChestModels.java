@@ -1,8 +1,8 @@
 package de.krien.twoDayZ.model.game.objects.chest;
 
-import de.krien.twoDayZ.model.game.IGameEntityModel;
+import de.krien.twoDayZ.model.IEntityModel;
 
-public enum EChestModels implements IGameEntityModel {
+public enum EChestModels implements IEntityModel {
 
     CRATE_01("CHEST_01"),
     CRATE_02("CHEST_02"),

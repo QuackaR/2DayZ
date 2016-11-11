@@ -1,6 +1,6 @@
-package de.krien.twoDayZ.model.game;
+package de.krien.twoDayZ.model;
 
-public interface IGameEntityModel {
+public interface IEntityModel {
 
     String getModelID();
     String getType();

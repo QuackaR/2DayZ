@@ -1,8 +1,8 @@
 package de.krien.twoDayZ.model.game.player;
 
-import de.krien.twoDayZ.model.game.IGameEntityModel;
+import de.krien.twoDayZ.model.IEntityModel;
 
-public enum EPlayerModels implements IGameEntityModel {
+public enum EPlayerModels implements IEntityModel {
 
     DEFAULT("PLAYER_1");
 

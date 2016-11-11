@@ -19,14 +19,17 @@ public class Chest extends AGameEntity implements IClickableEntity {
 
 	public Chest() {
 		super();
-		this.texture = TextureUtil.loadGameEntityImage(EChestModels.MILITARY_CHEST_01);
+		this.texture = TextureUtil.loadEntityImage(EChestModels.MILITARY_CHEST_01);
+		initContextMenuEntries();
+		this.contextMenu = new ContextMenu("Chest", contextMenuEntries);
 	}
 
 	@Override
 	public void clicked(Vector2f clickPosition) {
-		initContextMenuEntries();
-		this.contextMenu = new ContextMenu(clickPosition, contextMenuEntries);
-		UIEntities.INSTANCE.addEntity(contextMenu);
+		contextMenu.setPosition(clickPosition);
+		if(!UIEntities.INSTANCE.getEntityList().contains(contextMenu)) {
+			UIEntities.INSTANCE.addEntity(contextMenu);
+		}
 	}
 	
 	private void initContextMenuEntries() {
@@ -34,10 +37,8 @@ public class Chest extends AGameEntity implements IClickableEntity {
 
 			@Override
 			public void run() {
-				System.out.println("Open Chest-Option clicked!");
-				texture = TextureUtil.loadGameEntityImage(EChestModels.MILITARY_CHEST_02);
+				texture = TextureUtil.loadEntityImage(EChestModels.MILITARY_CHEST_02);
 				UIEntities.INSTANCE.removeEntity(contextMenu);
-				contextMenu = null;
 			}
 
 			@Override
@@ -51,7 +52,6 @@ public class Chest extends AGameEntity implements IClickableEntity {
 			public void run() {
 				System.out.println("Close-Option clicked!");
 				UIEntities.INSTANCE.removeEntity(contextMenu);
-				contextMenu = null;
 			}
 
 			@Override

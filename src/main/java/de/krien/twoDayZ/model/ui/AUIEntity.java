@@ -56,7 +56,7 @@ public class AUIEntity extends AEntity {
 
 	public void draw() {
 		if (texture != null) {
-			RenderUtil.drawUIObject(texture, verticesBufferID, textureBufferID, vertices.limit());
+			RenderUtil.drawUIObject(verticesBufferID, textureBufferID, vertices.limit(), texture);
 		} else if (color != null) {
 			RenderUtil.drawUIObject(verticesBufferID, colorBufferID, vertices.limit());
 		}

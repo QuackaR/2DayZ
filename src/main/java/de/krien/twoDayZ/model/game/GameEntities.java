@@ -15,8 +15,10 @@ public enum GameEntities {
 	private List<AGameEntity> entityList;
 
 	private GameEntities() {
+	}
+	
+	private void init() {
 		entityList = new ArrayList<>();
-
 		// TODO TMP
 		Player player = new Player();
 		player.setPosition(new Vector2f(250, 250));
@@ -28,6 +30,9 @@ public enum GameEntities {
 	}
 
 	public List<AGameEntity> getEntityList() {
+		if(entityList == null)  {
+			init();
+		}
 		return entityList;
 	}
 
