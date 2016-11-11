@@ -26,23 +26,23 @@ public class ContextMenu extends AUIEntity implements IClickableEntity {
 		super();
 		this.title = title;
 		this.textColor = DEFAULT_TEXT_COLOR;
-		this.texture = TextureUtil.loadEntityImage(EUIModel.MENU);
-		this.size = new Vector2f(DEFAULT_ENTRY_WIDTH, DEFAULT_ENTRY_HEIGHT*(entries.size()+1));
+		setTexture(TextureUtil.loadEntityImage(EUIModel.MENU));
+		setSize(new Vector2f(DEFAULT_ENTRY_WIDTH, DEFAULT_ENTRY_HEIGHT*(entries.size()+1)));
 		this.entrySize = new Vector2f(DEFAULT_ENTRY_WIDTH, DEFAULT_ENTRY_HEIGHT);
 		this.entries = entries;
 	}
 
 	@Override
 	public void update(float timeSinceLastGameLoop) {
-		vertices = RenderContextMenuUtil.createMenuVerticesVBO(verticesBufferID, position, entrySize, entries);
+		vertices = RenderContextMenuUtil.createMenuVerticesVBO(verticesBufferID, getPosition(), entrySize, entries);
 		textures = RenderContextMenuUtil.createMenuTextureVBO(textureBufferID, entries);
 	}
 
 	@Override
 	public void draw() {
-		RenderContextMenuUtil.drawContextMenu(verticesBufferID, textureBufferID, vertices.limit(), texture);
-		RenderContextMenuUtil.drawContextMenuTitle(title, textColor, position, entrySize);
-		RenderContextMenuUtil.drawContextMenuEntries(textColor, position, entrySize, entries);
+		RenderContextMenuUtil.drawContextMenu(verticesBufferID, textureBufferID, vertices.limit(), getTexture());
+		RenderContextMenuUtil.drawContextMenuTitle(title, textColor, getPosition(), entrySize);
+		RenderContextMenuUtil.drawContextMenuEntries(textColor, getPosition(), entrySize, entries);
 	}
 
 
@@ -51,8 +51,8 @@ public class ContextMenu extends AUIEntity implements IClickableEntity {
 	public void clicked(Vector2f clickPosition) {
 		float entryHeight = entrySize.getY();
 		for (int i = 0; i < entries.size(); i++) {
-			float positionMin = position.getY() + entryHeight * (i + 1);
-			float positionMax = position.getY() + entryHeight * (i + 2);
+			float positionMin = getPosition().getY() + entryHeight * (i + 1);
+			float positionMax = getPosition().getY() + entryHeight * (i + 2);
 			if (clickPosition.getY() >= positionMin && clickPosition.getY() <= positionMax) {
 				entries.get(i).run();
 			}

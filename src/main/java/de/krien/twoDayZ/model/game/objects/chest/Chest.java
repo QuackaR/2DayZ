@@ -10,16 +10,21 @@ import de.krien.twoDayZ.model.game.AGameEntity;
 import de.krien.twoDayZ.model.ui.UIEntities;
 import de.krien.twoDayZ.model.ui.menu.ContextMenu;
 import de.krien.twoDayZ.model.ui.menu.IContextMenuEntry;
+import de.krien.twoDayZ.util.physics.PhysicsUtil;
 import de.krien.twoDayZ.util.texture.TextureUtil;
 
 public class Chest extends AGameEntity implements IClickableEntity {
 
+	private final float DEFAULT_SCALE = 1.0f;
+	
 	private ContextMenu contextMenu;
 	private List<IContextMenuEntry> contextMenuEntries;;
 
 	public Chest() {
 		super();
-		this.texture = TextureUtil.loadEntityImage(EChestModels.MILITARY_CHEST_01);
+		setBody(PhysicsUtil.initCircleBody(this));
+		setScale(DEFAULT_SCALE);
+		setTexture(TextureUtil.loadEntityImage(EChestModels.MILITARY_CHEST_01));
 		initContextMenuEntries();
 		this.contextMenu = new ContextMenu("Chest", contextMenuEntries);
 	}
@@ -37,7 +42,7 @@ public class Chest extends AGameEntity implements IClickableEntity {
 
 			@Override
 			public void run() {
-				texture = TextureUtil.loadEntityImage(EChestModels.MILITARY_CHEST_02);
+				setTexture(TextureUtil.loadEntityImage(EChestModels.MILITARY_CHEST_02));
 				UIEntities.INSTANCE.removeEntity(contextMenu);
 			}
 

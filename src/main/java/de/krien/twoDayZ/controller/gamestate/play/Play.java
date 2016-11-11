@@ -7,6 +7,7 @@ import de.krien.twoDayZ.model.game.AGameEntity;
 import de.krien.twoDayZ.model.game.GameEntities;
 import de.krien.twoDayZ.model.ui.AUIEntity;
 import de.krien.twoDayZ.model.ui.UIEntities;
+import de.krien.twoDayZ.util.physics.PhysicsUtil;
 
 public class Play implements IGameState {
 
@@ -20,6 +21,7 @@ public class Play implements IGameState {
 
     public void update() {
         float timeSinceLastGameLoop = getTimeSinceLastGameLoop();
+        PhysicsUtil.update(timeSinceLastGameLoop);
         updateGameEntities(timeSinceLastGameLoop);
         updateUIEntities(timeSinceLastGameLoop);
     }

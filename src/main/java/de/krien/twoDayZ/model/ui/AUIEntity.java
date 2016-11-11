@@ -12,8 +12,8 @@ import de.krien.twoDayZ.util.render.RenderUtil;
 
 public class AUIEntity extends AEntity {
 
-	public Texture texture;
-	public Color color;
+	private Texture texture;
+	private Color color;
 
 	public int verticesBufferID;
 	public int textureBufferID;
@@ -29,16 +29,16 @@ public class AUIEntity extends AEntity {
 	}
 
 	public AUIEntity(Vector2f position, Texture texture) {
-		this.position = position;
-		this.texture = texture;
+		setPosition(position);
+		setTexture(texture);
 		verticesBufferID = GL15.glGenBuffers();
 		textureBufferID = GL15.glGenBuffers();
 	}
 
 	public AUIEntity(Vector2f position, Vector2f size, Color color) {
-		this.position = position;
-		this.size = size;
-		this.color = color;
+		setPosition(position);
+		setSize(size);
+		setColor(color);
 
 		verticesBufferID = GL15.glGenBuffers();
 		colorBufferID = GL15.glGenBuffers();
@@ -46,17 +46,17 @@ public class AUIEntity extends AEntity {
 
 	public void update(float timeSinceLastGameLoop) {
 		if (texture != null) {
-			vertices = RenderUtil.createVerticesVBO(verticesBufferID, texture, position);
+			vertices = RenderUtil.createVerticesVBO(verticesBufferID, getTexture(), getPosition());
 			textures = RenderUtil.createTextureVBO(textureBufferID);
 		} else if (color != null) {
-			vertices = RenderUtil.createVerticesVBO(verticesBufferID, position, size);
-			colors = RenderUtil.createColorVBO(colorBufferID, color);
+			vertices = RenderUtil.createVerticesVBO(verticesBufferID, getPosition(), getSize());
+			colors = RenderUtil.createColorVBO(colorBufferID, getColor());
 		}
 	}
 
 	public void draw() {
 		if (texture != null) {
-			RenderUtil.drawUIObject(verticesBufferID, textureBufferID, vertices.limit(), texture);
+			RenderUtil.drawUIObject(verticesBufferID, textureBufferID, vertices.limit(), getTexture());
 		} else if (color != null) {
 			RenderUtil.drawUIObject(verticesBufferID, colorBufferID, vertices.limit());
 		}

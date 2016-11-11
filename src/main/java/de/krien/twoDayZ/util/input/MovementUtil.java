@@ -1,7 +1,7 @@
 package de.krien.twoDayZ.util.input;
 
+import org.jbox2d.common.Vec2;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.util.vector.Vector2f;
 
 import de.krien.twoDayZ.model.game.player.Player;
 
@@ -49,26 +49,26 @@ public class MovementUtil {
 	private static void doMovement(Player player, float timeSinceLastGameLoop) {
 		if (player.getPlayerMovement().isMoveRight()) {
 			float diffX = player.getSpeed() * timeSinceLastGameLoop;
-			Vector2f newPosition = new Vector2f(player.getPosition().getX() + diffX, player.getPosition().getY());
-			player.setPosition(newPosition);
+			Vec2 newPosition = new Vec2(player.getBody().getPosition().x + diffX, player.getBody().getPosition().y);
+			player.getBody().setTransform(newPosition, 0);
 		}
 
 		if (player.getPlayerMovement().isMoveLeft()) {
 			float diffX = player.getSpeed() * timeSinceLastGameLoop;
-			Vector2f newPosition = new Vector2f(player.getPosition().getX() - diffX, player.getPosition().getY());
-			player.setPosition(newPosition);
+			Vec2 newPosition = new Vec2(player.getBody().getPosition().x - diffX, player.getBody().getPosition().y);
+			player.getBody().setTransform(newPosition, 0);
 		}
 
 		if (player.getPlayerMovement().isMoveDown()) {
 			float diffY = player.getSpeed() * timeSinceLastGameLoop;
-			Vector2f newPosition = new Vector2f(player.getPosition().getX(), player.getPosition().getY() + diffY);
-			player.setPosition(newPosition);
+			Vec2 newPosition = new Vec2(player.getBody().getPosition().x, player.getBody().getPosition().y + diffY);
+			player.getBody().setTransform(newPosition, 0);
 		}
 
 		if (player.getPlayerMovement().isMoveUp()) {
 			float diffY = player.getSpeed() * timeSinceLastGameLoop;
-			Vector2f newPosition = new Vector2f(player.getPosition().getX(), player.getPosition().getY() - diffY);
-			player.setPosition(newPosition);
+			Vec2 newPosition = new Vec2(player.getBody().getPosition().x, player.getBody().getPosition().y - diffY);
+			player.getBody().setTransform(newPosition, 0);
 		}
 	}
 
