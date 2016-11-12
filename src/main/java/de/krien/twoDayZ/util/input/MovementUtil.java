@@ -1,6 +1,7 @@
 package de.krien.twoDayZ.util.input;
 
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.ContactEdge;
 import org.lwjgl.input.Keyboard;
 
 import de.krien.twoDayZ.model.game.player.Player;
@@ -47,29 +48,73 @@ public class MovementUtil {
 	}
 
 	private static void doMovement(Player player, float timeSinceLastGameLoop) {
+//		float testDiffX = player.getSpeed() * timeSinceLastGameLoop * 5;
+//		float diffX = player.getSpeed() * timeSinceLastGameLoop;
+//		float testDiffY = player.getSpeed() * timeSinceLastGameLoop * 5;
+//		float diffY = player.getSpeed() * timeSinceLastGameLoop;
+		player.getBody().setLinearVelocity(new Vec2(0,0));
+
 		if (player.getPlayerMovement().isMoveRight()) {
-			float diffX = player.getSpeed() * timeSinceLastGameLoop;
-			Vec2 newPosition = new Vec2(player.getBody().getPosition().x + diffX, player.getBody().getPosition().y);
-			player.getBody().setTransform(newPosition, 0);
+//			Vec2 testPosition = new Vec2(player.getBody().getPosition().x + testDiffX, player.getBody().getPosition().y);
+//			if (!checkCollisions(player, testPosition)) {
+//				Vec2 newPosition = new Vec2(player.getBody().getPosition().x + diffX, player.getBody().getPosition().y);
+//				player.getBody().setTransform(newPosition, player.getRotation());
+//			} else {
+//				System.out.println("Collision Right");
+//			}
+			player.getBody().setLinearVelocity(new Vec2(player.getSpeed(), player.getBody().getLinearVelocity().y));
 		}
 
 		if (player.getPlayerMovement().isMoveLeft()) {
-			float diffX = player.getSpeed() * timeSinceLastGameLoop;
-			Vec2 newPosition = new Vec2(player.getBody().getPosition().x - diffX, player.getBody().getPosition().y);
-			player.getBody().setTransform(newPosition, 0);
+//			Vec2 testPosition = new Vec2(player.getBody().getPosition().x - testDiffX, player.getBody().getPosition().y);
+//			if (!checkCollisions(player, testPosition)) {
+//				Vec2 newPosition = new Vec2(player.getBody().getPosition().x - diffX, player.getBody().getPosition().y);
+//				player.getBody().setTransform(newPosition, player.getRotation());
+//			} else {
+//				System.out.println("Collision Left");
+//			}
+			player.getBody().setLinearVelocity(new Vec2(-player.getSpeed(), player.getBody().getLinearVelocity().y));
 		}
 
 		if (player.getPlayerMovement().isMoveDown()) {
-			float diffY = player.getSpeed() * timeSinceLastGameLoop;
-			Vec2 newPosition = new Vec2(player.getBody().getPosition().x, player.getBody().getPosition().y + diffY);
-			player.getBody().setTransform(newPosition, 0);
+//			Vec2 testPosition = new Vec2(player.getBody().getPosition().x, player.getBody().getPosition().y + testDiffY);
+//			if (!checkCollisions(player, testPosition)) {
+//				diffY = player.getSpeed() * timeSinceLastGameLoop;
+//				Vec2 newPosition = new Vec2(player.getBody().getPosition().x, player.getBody().getPosition().y + diffY);
+//				player.getBody().setTransform(newPosition, player.getRotation());
+//			} else {
+//				System.out.println("Collision Down");
+//			}
+			player.getBody().setLinearVelocity(new Vec2(player.getBody().getLinearVelocity().x, player.getSpeed()));
 		}
 
 		if (player.getPlayerMovement().isMoveUp()) {
-			float diffY = player.getSpeed() * timeSinceLastGameLoop;
-			Vec2 newPosition = new Vec2(player.getBody().getPosition().x, player.getBody().getPosition().y - diffY);
-			player.getBody().setTransform(newPosition, 0);
+//			Vec2 testPosition = new Vec2(player.getBody().getPosition().x, player.getBody().getPosition().y - testDiffY);
+//			if (!checkCollisions(player, testPosition)) {
+//				diffY = player.getSpeed() * timeSinceLastGameLoop;
+//				Vec2 newPosition = new Vec2(player.getBody().getPosition().x, player.getBody().getPosition().y - diffY);
+//				player.getBody().setTransform(newPosition, player.getRotation());
+//			} else {
+//				System.out.println("Collision Up");
+//			}
+			player.getBody().setLinearVelocity(new Vec2(player.getBody().getLinearVelocity().x, -player.getSpeed()));
 		}
+
+	}
+
+	private static boolean checkCollisions(Player player, Vec2 position) {
+		Vec2 oldPosition = player.getBody().getPosition().clone();
+		player.getBody().setTransform(position, player.getRotation());
+		ContactEdge ce = player.getBody().getContactList();
+		while (ce != null) {
+			if (ce.contact.isTouching()) {
+				player.getBody().setTransform(oldPosition, player.getRotation());
+				return true;
+			}
+			ce = ce.next;
+		}
+		player.getBody().setTransform(oldPosition, player.getRotation());
+		return false;
 	}
 
 }

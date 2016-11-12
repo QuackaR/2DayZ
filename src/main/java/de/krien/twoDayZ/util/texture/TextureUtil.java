@@ -11,7 +11,7 @@ import de.krien.twoDayZ.model.IEntityModel;
 public class TextureUtil {
 
     private final static String IMAGE_TYPE = "PNG";
-
+    
     public static Texture loadEntityImage(IEntityModel model) {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         String fileName = model.getModelID() + "." + IMAGE_TYPE.toLowerCase();
@@ -20,7 +20,8 @@ public class TextureUtil {
             path = loader.getResource("resources/" + model.getType() + "/" + fileName);
         }
         try {
-            return TextureLoader.getTexture(IMAGE_TYPE, path.openStream());
+            Texture tex = TextureLoader.getTexture(IMAGE_TYPE, path.openStream());
+    		return tex;
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -22,9 +22,9 @@ public class Chest extends AGameEntity implements IClickableEntity {
 
 	public Chest() {
 		super();
-		setBody(PhysicsUtil.initCircleBody(this));
-		setScale(DEFAULT_SCALE);
 		setTexture(TextureUtil.loadEntityImage(EChestModels.MILITARY_CHEST_01));
+		setBody(PhysicsUtil.initStationaryRectangluarBody(this));
+		setScale(DEFAULT_SCALE);
 		initContextMenuEntries();
 		this.contextMenu = new ContextMenu("Chest", contextMenuEntries);
 	}

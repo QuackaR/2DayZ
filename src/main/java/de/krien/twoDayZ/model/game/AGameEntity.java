@@ -41,6 +41,7 @@ public class AGameEntity extends AEntity {
 	public void draw() {
 		RenderUtil.drawGameObject(getTexture(), getScale(), getPosition(), (float) getRotation(), verticesBufferID,
 				texturesBufferID, vertices.limit());
+        //RenderUtil.drawPhysics(getBody(), getPosition());
 	}
 
 	public float getScale() {
@@ -81,7 +82,9 @@ public class AGameEntity extends AEntity {
 
 	@Override
 	public Vector2f getSize() {
-		return new Vector2f(getTexture().getImageWidth(), getTexture().getImageHeight());
+		Vector2f size = new Vector2f(getTexture().getImageWidth(), getTexture().getImageHeight());
+		System.out.println(size);
+		return size;
 	}
 
 	@Override

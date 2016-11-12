@@ -1,8 +1,5 @@
 package de.krien.twoDayZ.model.game.player;
 
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.contacts.ContactEdge;
-
 import de.krien.twoDayZ.model.game.AGameEntity;
 import de.krien.twoDayZ.util.input.MouseUtil;
 import de.krien.twoDayZ.util.input.MovementUtil;
@@ -23,37 +20,23 @@ public class Player extends AGameEntity {
 
     public Player() {
         super();
+       	setTexture(TextureUtil.loadEntityImage(EPlayerModels.DEFAULT));
        	setBody(PhysicsUtil.initCircleBody(this));
 		setScale(DEFAULT_SCALE);
         setSpeed(WALK_MOVEMENT_SPEED);
-       	setTexture(TextureUtil.loadEntityImage(EPlayerModels.DEFAULT));
         this.playerMovement = new PlayerMovement();
     }
 
     @Override
     public void update(float timeSinceLastGameLoop) {
-    	if(!checkCollisions()) {
-            MovementUtil.movePlayer(this, timeSinceLastGameLoop);
-    	}
+        MovementUtil.movePlayer(this, timeSinceLastGameLoop);
         RotationUtil.rotateEntityToCursor(this);
         MouseUtil.checkMouseActions();
         vertices = RenderUtil.createVerticesVBO(verticesBufferID, getTexture(), getPosition());
         textures = RenderUtil.createTextureVBO(texturesBufferID);
     }
     
-    private boolean checkCollisions() {
-        getBody().setTransform(new Vec2(getPosition().x, getPosition().y), getRotation());
-		ContactEdge ce = getBody().getContactList();
-		while(ce != null){
-			if(ce.contact.isTouching()) {
-				System.out.println("Collision");
-				return true;
-			}
-			ce = ce.next;
-		}
-		System.out.println("Keine Collision");
-		return false;
-    }
+
 
     public void running() {
         setSpeed(RUN_MOVEMENT_SPEED);

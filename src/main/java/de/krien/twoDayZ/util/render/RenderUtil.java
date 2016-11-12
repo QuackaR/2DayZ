@@ -2,6 +2,11 @@ package de.krien.twoDayZ.util.render;
 
 import java.nio.FloatBuffer;
 
+import org.jbox2d.collision.shapes.CircleShape;
+import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.Fixture;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
@@ -73,11 +78,12 @@ public class RenderUtil {
     }
 
     public static FloatBuffer createVerticesVBO(int bufferID, Texture texture, Vector2f position) {
+    	System.out.println(texture.getImageWidth() + "/" + texture.getImageHeight());
         float[] vertexData = {
-                -texture.getTextureWidth()/2 + position.getX(), 	-texture.getTextureHeight()/2 + position.getY(),
-                texture.getTextureWidth()/2 + position.getX(), 		-texture.getTextureHeight()/2 + position.getY(),
-                texture.getTextureWidth()/2 + position.getX(), 		texture.getTextureHeight()/2 + position.getY(),
-                -texture.getTextureWidth()/2 + position.getX(), 	texture.getTextureHeight()/2 + position.getY()
+                -texture.getImageWidth()/2 + position.getX(), 	-texture.getImageHeight()/2 + position.getY(),
+                texture.getImageWidth()/2 + position.getX(), 		-texture.getImageHeight()/2 + position.getY(),
+                texture.getImageWidth()/2 + position.getX(), 		texture.getImageHeight()/2 + position.getY(),
+                -texture.getImageWidth()/2 + position.getX(), 	texture.getImageHeight()/2 + position.getY()
         };
 
         FloatBuffer vertices;
@@ -90,6 +96,63 @@ public class RenderUtil {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 
         return vertices;
+    }
+    
+    public static void drawPhysics(Body body, Vector2f position) {
+        int colorBufferID = GL15.glGenBuffers();
+        createColorVBO(colorBufferID, Color.red);
+        
+        
+    	Fixture fixture = body.getFixtureList();
+    	while(fixture != null) {
+    		if(fixture.getShape() instanceof CircleShape) {
+//    			CircleShape shape = ((CircleShape) fixture.getShape());
+//    			float[] verticeArray = new float[360*2];
+//    			for(int vert = 0; vert < 360; vert++) {
+//    				float degInRad = vert*MathUtils.DEG2RAD;
+//    				verticeArray[vert*2] = position.x + MathUtils.cos(degInRad)*shape.getRadius();
+//    				verticeArray[vert*2+1] = position.y + MathUtils.sin(degInRad)*shape.getRadius();
+//    			}
+    			CircleShape bodyShape = ((CircleShape) fixture.getShape());
+    			PolygonShape shape = new PolygonShape();
+    			shape.setAsBox(bodyShape.getRadius(), bodyShape.getRadius());
+    			float[] verticeArray = new float[shape.getVertices().length*2];
+    			int i = 0;
+    			for(Vec2 vec : shape.getVertices()) {
+					verticeArray[i++] = position.x + vec.x;
+    				verticeArray[i++] = position.y + vec.y;
+    			}
+    	        FloatBuffer vertices;
+    	        vertices = BufferUtils.createFloatBuffer(verticeArray.length);
+    	        vertices.put(verticeArray);
+    	        vertices.flip();
+    	        int bufferID = GL15.glGenBuffers();
+    	        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, bufferID);
+    	        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vertices, GL15.GL_STATIC_DRAW);
+    	        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+    	        drawUIObject(bufferID, colorBufferID, vertices.limit());
+    		}
+    		if(fixture.getShape() instanceof PolygonShape) {
+    			PolygonShape shape = ((PolygonShape) fixture.getShape());
+    			float[] verticeArray = new float[shape.getVertices().length*2];
+    			int i = 0;
+    			for(Vec2 vec : shape.getVertices()) {
+    				verticeArray[i++] = position.x + vec.x;
+    				verticeArray[i++] = position.y + vec.y;
+    			}
+    	        FloatBuffer vertices;
+    	        vertices = BufferUtils.createFloatBuffer(verticeArray.length);
+    	        vertices.put(verticeArray);
+    	        vertices.flip();
+    	        int bufferID = GL15.glGenBuffers();
+    	        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, bufferID);
+    	        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vertices, GL15.GL_STATIC_DRAW);
+    	        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+    	        drawUIObject(bufferID, colorBufferID, vertices.limit());
+    		}
+    		
+    		fixture = fixture.getNext();
+    	}
     }
     
     /*public static FloatBuffer createVerticesVBO(int bufferID, Vector2f size, Vector2f position) {
