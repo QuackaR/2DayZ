@@ -85,6 +85,16 @@ public class RenderUtil {
                 texture.getImageWidth()/2 + position.getX(), 		texture.getImageHeight()/2 + position.getY(),
                 -texture.getImageWidth()/2 + position.getX(), 	texture.getImageHeight()/2 + position.getY()
         };
+        System.out.println(texture.getImageWidth() + " / " + texture.getImageHeight() + "\n" +
+        		position.x + " / " + position.y + "\n" +
+        		(-texture.getImageWidth()/2 + position.getX()) + " / " +
+        		(-texture.getImageHeight()/2 + position.getY()) + "\n" +
+                (texture.getImageWidth()/2 + position.getX()) + " / " +
+                (-texture.getImageHeight()/2 + position.getY()) + "\n" +
+                (texture.getImageWidth()/2 + position.getX()) + " / " +
+                (texture.getImageHeight()/2 + position.getY()) + "\n" +
+                (-texture.getImageWidth()/2 + position.getX()) + " / " +
+                (texture.getImageHeight()/2 + position.getY()) + "\n##############");
 
         FloatBuffer vertices;
         vertices = BufferUtils.createFloatBuffer(vertexData.length);
